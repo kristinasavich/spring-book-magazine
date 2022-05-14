@@ -1,34 +1,37 @@
 package ru.learnup.bd.springbookmagazine.dao.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table
 @Getter
 @Setter
+@ToString
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class Author {
-
-    @Column
-    private String fullName; //ФИО
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Author author = (Author) o;
-        return Objects.equals(fullName, author.fullName) && Objects.equals(id, author.id);
-    }
+    @Column
+    private String fullName; //ФИО
+
+
+    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Book> book;
 
     @Override
-    public int hashCode() {
-        return Objects.hash(fullName, id);
+    public int hashCode(){
+        return getClass().hashCode();
     }
+
+
 }

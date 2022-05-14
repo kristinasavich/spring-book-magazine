@@ -6,8 +6,7 @@ import javax.persistence.*;
 @Table
 public class Buy {
 
-    @OneToOne
-    @JoinColumn(name = "idBuyer")
+    @ManyToOne
     private Buyer idBuyer;
 
     @Id

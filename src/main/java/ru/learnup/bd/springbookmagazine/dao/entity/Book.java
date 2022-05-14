@@ -3,12 +3,16 @@ package ru.learnup.bd.springbookmagazine.dao.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table
 @Getter
 @Setter
-public class Book {
+@ToString(exclude = {"author"})
+@RequiredArgsConstructor
+@AllArgsConstructor
+public class Book  {
 
     @Column
     private String name; //название книги
@@ -21,6 +25,7 @@ public class Book {
     private Long yearPublishing; // год издания
 
     @ManyToOne
+    @JoinColumn
     private Author author;
 
     @Column
@@ -33,8 +38,8 @@ public class Book {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Library library;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private DetailsBuy detailsBuy;
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private DetailsBuy detailsBuy;
 
     public String getName() {
         return name;
@@ -42,5 +47,13 @@ public class Book {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Book(String name, Long yearPublishing, Author author, Long numbPages, Long sum){
+        this.author = author;
+        this.yearPublishing = yearPublishing;
+        this.numbPages = numbPages;
+        this.name = name;
+        this.sum = sum;
     }
 }

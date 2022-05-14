@@ -1,12 +1,19 @@
 package ru.learnup.bd.springbookmagazine.dao.entity;
 
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
+@ToString
 @Table
 public class DetailsBuy implements Serializable {
 
@@ -16,10 +23,10 @@ public class DetailsBuy implements Serializable {
 
     @MapsId
     @OneToOne
-    @JoinColumn(name = "idorders")
+    @JoinColumn
     private Buy idOrders;
 
-    @OneToMany(mappedBy = "detailsBuy", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany
     private List<Book> book;
 
     @Column
@@ -28,16 +35,16 @@ public class DetailsBuy implements Serializable {
     @Column
     private Long sum;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DetailsBuy that = (DetailsBuy) o;
-        return amountBook == that.amountBook && sum == that.sum && Objects.equals(idOrders, that.idOrders) && Objects.equals(book, that.book);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idOrders, book, amountBook, sum);
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        DetailsBuy that = (DetailsBuy) o;
+//        return amountBook == that.amountBook && sum == that.sum && Objects.equals(idOrders, that.idOrders) && Objects.equals(book, that.book);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(idOrders, book, amountBook, sum);
+//    }
 }

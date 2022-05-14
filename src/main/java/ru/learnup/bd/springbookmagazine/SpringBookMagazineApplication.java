@@ -5,7 +5,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import ru.learnup.bd.springbookmagazine.dao.*;
+import ru.learnup.bd.springbookmagazine.dao.entity.Book;
+import ru.learnup.bd.springbookmagazine.dao.service.AuthorService;
+import ru.learnup.bd.springbookmagazine.dao.entity.Author;
+import ru.learnup.bd.springbookmagazine.dao.repository.AuthorRepository;
+import ru.learnup.bd.springbookmagazine.dao.service.BookService;
 
 @SpringBootApplication
 public class SpringBookMagazineApplication {
@@ -14,15 +18,27 @@ public class SpringBookMagazineApplication {
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(SpringBookMagazineApplication.class, args);
 
-//        BooksMagazineDao bookMagDao = context.getBean(BooksMagazineDao.class);
-//		Author author = context.getBean(Author.class);
-//		author.setName("Пушкин");
+        AuthorRepository authorRepository = context.getBean(AuthorRepository.class);
+//        log.info("Author1: {}", authorRepository.findAuthorByFullName("Пушкин"));
+//        log.info("Author2: {}", authorRepository.findAllByFullNameContains("у"));
+        AuthorService authorService = context.getBean(AuthorService.class);
 
-//		bookMagDao.addBook(new Book(new Author("Александр", "Блок"), "Незнакомка", 3));
-//		bookMagDao.showBookName();
-//		log.info("{}", bookMagDao.findByNameBook("Александр Блок"));
-//        OrderDao orderDao = context.getBean(OrderDao.class);
-//        orderDao.getOrder(1);
+//        for (Author author : authorService.getAuthors()) {
+//            log.info("Authors: {}", author);
+//        }
+
+//        log.info("Create Author - {}", authorService.createAuthor(new Author("Онегин")));
+        Author pushkin = new Author();
+        pushkin.setFullName("Пушкин");
+        authorService.createAuthor(pushkin);
+        Book book = new Book();
+        book.setAuthor(pushkin);
+        book.setName("Руслан и Людмила");
+        book.setSum(580L);
+        book.setNumbPages(180L);
+        book.setYearPublishing(1830L);
+        BookService bookService = context.getBean(BookService.class);
+        log.info("Book create: {}", bookService.createBook(book));
     }
 
 }
