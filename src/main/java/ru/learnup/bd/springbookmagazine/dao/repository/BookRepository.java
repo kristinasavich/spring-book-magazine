@@ -11,8 +11,8 @@ import java.util.List;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-    @Query("from Book b where b.author = ?1")
-    List<Book> findAllByAuthor(Author author);
+    @Query(value = "from Book b join fetch b.author where b.author.fullName = :author")
+    List<Book> findAllByAuthor(String author);
 
 
 }

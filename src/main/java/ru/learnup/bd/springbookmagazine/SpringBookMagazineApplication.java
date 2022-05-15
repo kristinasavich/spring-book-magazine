@@ -42,7 +42,7 @@ public class SpringBookMagazineApplication {
         log.info("Book create: {}", bookService.createBook(book));
         //получение всех книг одного автора
         BookRepository bookRepository = context.getBean(BookRepository.class);
-        log.info("All books {}", bookRepository.findAllByAuthor(pushkin));
+        log.info("All books {}", bookRepository.findAllByAuthor("Пушкин"));
     }
 
 }
