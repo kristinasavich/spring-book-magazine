@@ -7,6 +7,4 @@ import ru.learnup.bd.springbookmagazine.dao.entity.DetailsBuy;
 import java.util.List;
 
 public interface DetailsBuyRepository extends JpaRepository<DetailsBuy, Long> {
-
-    List<DetailsBuy> findDetailsBuyByIdOrders(Buy id);
 }

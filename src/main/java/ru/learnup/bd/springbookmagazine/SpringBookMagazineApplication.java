@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import ru.learnup.bd.springbookmagazine.dao.entity.Book;
+import ru.learnup.bd.springbookmagazine.dao.repository.BookRepository;
 import ru.learnup.bd.springbookmagazine.dao.service.AuthorService;
 import ru.learnup.bd.springbookmagazine.dao.entity.Author;
 import ru.learnup.bd.springbookmagazine.dao.repository.AuthorRepository;
@@ -39,6 +40,9 @@ public class SpringBookMagazineApplication {
         book.setYearPublishing(1830L);
         BookService bookService = context.getBean(BookService.class);
         log.info("Book create: {}", bookService.createBook(book));
+        //получение всех книг одного автора
+        BookRepository bookRepository = context.getBean(BookRepository.class);
+        log.info("All books {}", bookRepository.findAllByAuthor(pushkin));
     }
 
 }

@@ -10,5 +10,4 @@ import java.util.List;
 @Repository
 public interface BuyRepository extends JpaRepository<Buy, Long> {
 
-    List<Buy> findBuyByIdBuyer(Buyer id);
 }

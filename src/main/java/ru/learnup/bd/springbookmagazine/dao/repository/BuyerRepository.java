@@ -9,5 +9,4 @@ import java.util.List;
 @Repository
 public interface BuyerRepository extends JpaRepository <Buyer, Long> {
 
-    List<Buyer> findBuyerByBuyId(Long id);
 }
