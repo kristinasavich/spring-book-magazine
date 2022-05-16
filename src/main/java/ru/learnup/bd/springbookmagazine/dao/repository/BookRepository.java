@@ -12,8 +12,4 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Query(value = "from Book b join fetch b.author where b.author.fullName = :name")
     List<Book> findAllByAuthorContains(String name);
-
-
-
-
 }
