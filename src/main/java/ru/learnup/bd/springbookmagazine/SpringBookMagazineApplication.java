@@ -29,20 +29,20 @@ public class SpringBookMagazineApplication {
 //        }
 
 //        log.info("Create Author - {}", authorService.createAuthor(new Author("Онегин")));
-        Author pushkin = new Author();
-        pushkin.setFullName("Пушкин");
-        authorService.createAuthor(pushkin);
-        Book book = new Book();
-        book.setAuthor(pushkin);
-        book.setName("Руслан и Людмила");
-        book.setSum(580L);
-        book.setNumbPages(180L);
-        book.setYearPublishing(1830L);
-        BookService bookService = context.getBean(BookService.class);
-        log.info("Book create: {}", bookService.createBook(book));
+//        Author pushkin = new Author();
+//        pushkin.setFullName("Пушкин");
+//        authorService.createAuthor(pushkin);
+//        Book book = new Book();
+//        book.setAuthor(pushkin);
+//        book.setName("Руслан и Людмила");
+//        book.setSum(580L);
+//        book.setNumbPages(180L);
+//        book.setYearPublishing(1830L);
+//        BookService bookService = context.getBean(BookService.class);
+//        log.info("Book create: {}", bookService.createBook(book));
         //получение всех книг одного автора
         BookRepository bookRepository = context.getBean(BookRepository.class);
-        log.info("All books {}", bookRepository.findAllByAuthor("Пушкин"));
+        log.info("All books {}", bookRepository.findAllByAuthorContains("Пушкин"));
     }
 
 }

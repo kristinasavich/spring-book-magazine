@@ -3,7 +3,6 @@ package ru.learnup.bd.springbookmagazine.dao.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import ru.learnup.bd.springbookmagazine.dao.entity.Author;
 import ru.learnup.bd.springbookmagazine.dao.entity.Book;
 
 import java.util.List;
@@ -11,8 +10,10 @@ import java.util.List;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-    @Query(value = "from Book b join fetch b.author where b.author.fullName = :author")
-    List<Book> findAllByAuthor(String author);
+    @Query(value = "from Book b join fetch b.author where b.author.fullName = :name")
+    List<Book> findAllByAuthorContains(String name);
+
+
 
 
 }
