@@ -1,5 +1,6 @@
 package ru.learnup.bd.springbookmagazine;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -12,9 +13,9 @@ import ru.learnup.bd.springbookmagazine.dao.entity.Author;
 import ru.learnup.bd.springbookmagazine.dao.repository.AuthorRepository;
 import ru.learnup.bd.springbookmagazine.dao.service.BookService;
 
+@Slf4j
 @SpringBootApplication
 public class SpringBookMagazineApplication {
-    private static final Logger log = LoggerFactory.getLogger(SpringBookMagazineApplication.class);
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(SpringBookMagazineApplication.class, args);
@@ -42,7 +43,7 @@ public class SpringBookMagazineApplication {
 //        log.info("Book create: {}", bookService.createBook(book));
         //получение всех книг одного автора
         BookRepository bookRepository = context.getBean(BookRepository.class);
-        log.info("All books {}", bookRepository.findAllByAuthorContains("Пушкин"));
+        log.info("All books {}", bookRepository.findAllByAuthorContains("Булгаков"));
     }
 
 }
