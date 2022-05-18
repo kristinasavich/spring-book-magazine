@@ -34,34 +34,25 @@ public class SpringBookMagazineApplication {
 
 //        log.info("Create Author - {}", authorService.createAuthor(new Author("Онегин")));
 //        Author pushkin = new Author();
-//        pushkin.setFullName("Пушкин");
+//        pushkin.setFullName("Александр Сергеевич Пушкин");
 //        //если автор уже существует, то вернётся актуальный id
 //        Author b = authorService.createAuthor(pushkin);
 //
-//        Author gogol = new Author();
-//        gogol.setFullName("Гоголь");
-//        authorService.createAuthor(gogol);
+//
 //        Book book = new Book();
 //        book.setAuthor(b);
-//        book.setName("Сказка");
+//        book.setName("Руслан и Людмила");
 //        book.setSum(700L);
 //        book.setNumbPages(130L);
 //        book.setYearPublishing(1836L);
+//        book.setImageUrl("https://cv8.litres.ru/pub/c/audiokniga/cover_max1500/43672989-aleksandr-pushkin-ruslan-i-ludmila-43672989.jpg");
 //        BookService bookService = context.getBean(BookService.class);
 //        bookService.createBook(book);
-        BookRepository bookRepository = context.getBean(BookRepository.class);
-//
-//        LibraryRepository libraryRepository = context.getBean(LibraryRepository.class);
-        LibraryService libraryService = context.getBean(LibraryService.class);
-        Library f = new Library();
-        f.setLostBook(15L);
-        f.setBook(bookRepository.getById(1L));
+//        BookRepository bookRepository = context.getBean(BookRepository.class);
+//        LibraryService libraryService = context.getBean(LibraryService.class);
+//        Library f = new Library();
+//        f.setLostBook(15L);
+//        f.setBook(bookRepository.getById(1L));
 //        libraryService.addBookInLibrary(f);
-//        for (Library library : libraryService.getLibraryAll()) {
-//            log.info("update library1 Book, Amount:{}", library);
-//        }
-
-
-
     }
 }

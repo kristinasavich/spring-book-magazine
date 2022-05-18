@@ -10,6 +10,7 @@ import java.io.Serializable;
 @Data
 @RequiredArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Book  {
 
     @Column
@@ -31,6 +32,9 @@ public class Book  {
 
     @Column
     private Long sum; // стоимость
+
+
+    private String imageUrl;
 
 
 //    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
