@@ -1,20 +1,34 @@
 package ru.learnup.bd.springbookmagazine.dao.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+//@ToString(exclude = {"book"})
+@Getter
+@Setter
 public class Library {
-
-    @OneToMany(mappedBy = "library", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Book> book;
 
     @Column
     private Long lostBook; //остаток книг
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne
+    @JoinColumn
+    @ToString.Exclude
+    private Book book;
+
+    public Library(Book book, Long lostBook){
+        this.book = book;
+        this.lostBook = lostBook;
+    }
 }

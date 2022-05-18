@@ -5,9 +5,12 @@ import org.springframework.stereotype.Repository;
 import ru.learnup.bd.springbookmagazine.dao.entity.Author;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, Long>{
+
+    Author findAuthorByFullName(String name);
 
 
 }

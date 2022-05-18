@@ -10,9 +10,7 @@ import java.util.Objects;
 
 @Entity
 @Table
-@Getter
-@Setter
-@ToString
+@Data
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class Author {
@@ -26,6 +24,7 @@ public class Author {
 
 
     @OneToMany(mappedBy = "author", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ToString.Exclude
     private List<Book> book;
 
     @Override

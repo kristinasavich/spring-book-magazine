@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface LibraryRepository extends JpaRepository<Library, Long> {
 
+    Library findAllByBookContains(String text);
+
 }

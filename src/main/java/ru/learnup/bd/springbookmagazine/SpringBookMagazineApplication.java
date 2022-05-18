@@ -1,23 +1,26 @@
 package ru.learnup.bd.springbookmagazine;
 
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import ru.learnup.bd.springbookmagazine.dao.entity.Book;
-import ru.learnup.bd.springbookmagazine.dao.repository.BookRepository;
-import ru.learnup.bd.springbookmagazine.dao.service.AuthorService;
 import ru.learnup.bd.springbookmagazine.dao.entity.Author;
+import ru.learnup.bd.springbookmagazine.dao.entity.Book;
+import ru.learnup.bd.springbookmagazine.dao.entity.Library;
+import ru.learnup.bd.springbookmagazine.dao.entity.Product;
 import ru.learnup.bd.springbookmagazine.dao.repository.AuthorRepository;
+import ru.learnup.bd.springbookmagazine.dao.repository.BookRepository;
+import ru.learnup.bd.springbookmagazine.dao.repository.LibraryRepository;
+import ru.learnup.bd.springbookmagazine.dao.service.AuthorService;
 import ru.learnup.bd.springbookmagazine.dao.service.BookService;
+import ru.learnup.bd.springbookmagazine.dao.service.LibraryService;
+import ru.learnup.bd.springbookmagazine.dao.service.ProductService;
 
 @Slf4j
 @SpringBootApplication
 public class SpringBookMagazineApplication {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         ConfigurableApplicationContext context = SpringApplication.run(SpringBookMagazineApplication.class, args);
 
         AuthorRepository authorRepository = context.getBean(AuthorRepository.class);
@@ -32,18 +35,33 @@ public class SpringBookMagazineApplication {
 //        log.info("Create Author - {}", authorService.createAuthor(new Author("Онегин")));
 //        Author pushkin = new Author();
 //        pushkin.setFullName("Пушкин");
-//        authorService.createAuthor(pushkin);
+//        //если автор уже существует, то вернётся актуальный id
+//        Author b = authorService.createAuthor(pushkin);
+//
+//        Author gogol = new Author();
+//        gogol.setFullName("Гоголь");
+//        authorService.createAuthor(gogol);
 //        Book book = new Book();
-//        book.setAuthor(pushkin);
-//        book.setName("Руслан и Людмила");
-//        book.setSum(580L);
-//        book.setNumbPages(180L);
-//        book.setYearPublishing(1830L);
+//        book.setAuthor(b);
+//        book.setName("Сказка");
+//        book.setSum(700L);
+//        book.setNumbPages(130L);
+//        book.setYearPublishing(1836L);
 //        BookService bookService = context.getBean(BookService.class);
-//        log.info("Book create: {}", bookService.createBook(book));
-        //получение всех книг одного автора
+//        bookService.createBook(book);
         BookRepository bookRepository = context.getBean(BookRepository.class);
-        log.info("All books {}", bookRepository.findAllByAuthorContains("Булгаков"));
-    }
+//
+//        LibraryRepository libraryRepository = context.getBean(LibraryRepository.class);
+        LibraryService libraryService = context.getBean(LibraryService.class);
+        Library f = new Library();
+        f.setLostBook(15L);
+        f.setBook(bookRepository.getById(1L));
+//        libraryService.addBookInLibrary(f);
+//        for (Library library : libraryService.getLibraryAll()) {
+//            log.info("update library1 Book, Amount:{}", library);
+//        }
 
+
+
+    }
 }

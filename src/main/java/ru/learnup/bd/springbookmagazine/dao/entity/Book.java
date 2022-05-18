@@ -7,9 +7,7 @@ import java.io.Serializable;
 
 @Entity
 @Table
-@Getter
-@Setter
-@ToString(exclude = {"author"})
+@Data
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class Book  {
@@ -25,7 +23,7 @@ public class Book  {
     private Long yearPublishing; // год издания
 
     @ManyToOne
-    @JoinColumn
+    @ToString.Exclude
     private Author author;
 
     @Column
@@ -35,22 +33,13 @@ public class Book  {
     private Long sum; // стоимость
 
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Library library;
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private Library library;
 
 //    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    private DetailsBuy detailsBuy;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Book(String name, Long yearPublishing, Author author, Long numbPages, Long sum){
-        this.author = author;
+    public Book(String name, Long yearPublishing, Long numbPages, Long sum){
         this.yearPublishing = yearPublishing;
         this.numbPages = numbPages;
         this.name = name;

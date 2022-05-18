@@ -9,7 +9,11 @@ import java.util.List;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
-
+    //    @Query(value = "select * from book b left join author a on a.id = b.author_id where a.full_name = :name",
+//            nativeQuery = true)
     @Query(value = "from Book b join fetch b.author where b.author.fullName = :name")
     List<Book> findAllByAuthorContains(String name);
+
+    List<Book> findBookByNameContains(String name);
+
 }
