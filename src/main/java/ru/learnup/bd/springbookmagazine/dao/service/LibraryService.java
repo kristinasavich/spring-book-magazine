@@ -24,7 +24,7 @@ public class LibraryService {
         return libraryRepository.findAll();
     }
 
-    @Cacheable("library")
+    @Cacheable(value = "library")
     public Library addBookInLibrary(Library library){
 
         return libraryRepository.save(library);
@@ -34,7 +34,7 @@ public class LibraryService {
         return libraryRepository.getById(id);
     }
 
-    @CacheEvict("library")
+    @CacheEvict(value = "library")
     public void deleteBookIdLibrary(Long id){
         log.info("delete book in library");
         libraryRepository.delete(libraryRepository.getById(id));

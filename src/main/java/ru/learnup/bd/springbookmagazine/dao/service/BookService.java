@@ -32,7 +32,7 @@ public class BookService {
     }
 
 
-    @CacheEvict("books")
+    @CacheEvict(value = "books")
     public void deleteBookById(Long id) {
         log.info("delete book: {}", bookRepository.getById(id));
         bookRepository.delete(bookRepository.getById(id));

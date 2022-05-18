@@ -24,7 +24,7 @@ public class AuthorService {
 
     }
 
-    @Cacheable("author")
+    @Cacheable(value = "author")
     public List<Author> getAuthors() {
         return authorRepository.findAll();
     }
