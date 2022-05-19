@@ -26,7 +26,7 @@ public class LibraryService {
 
     @Cacheable(value = "library")
     public Library addBookInLibrary(Library library){
-
+        log.info("add library: {}");
         return libraryRepository.save(library);
     }
 

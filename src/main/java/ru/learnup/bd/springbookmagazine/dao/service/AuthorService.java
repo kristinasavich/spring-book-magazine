@@ -20,6 +20,7 @@ public class AuthorService {
 
     @Cacheable(value = "author", key = "#author.fullName")
     public Author createAuthor(Author author){
+        log.info("create author: {}", author);
         return authorRepository.save(author);
 
     }
@@ -27,6 +28,10 @@ public class AuthorService {
     @Cacheable(value = "author")
     public List<Author> getAuthors() {
         return authorRepository.findAll();
+    }
+
+    public Author getAuthorByName(String name){
+        return authorRepository.findAuthorByFullName(name);
     }
 
     public Author getAuthorById(Long id){

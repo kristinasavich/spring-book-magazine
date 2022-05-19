@@ -4,13 +4,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import ru.learnup.bd.springbookmagazine.dao.controller.filter.BookFilter;
 import ru.learnup.bd.springbookmagazine.dao.entity.Book;
 import ru.learnup.bd.springbookmagazine.dao.repository.BookRepository;
-import ru.learnup.bd.springbookmagazine.dao.repository.LibraryRepository;
 
 import java.util.List;
+
+import static ru.learnup.bd.springbookmagazine.dao.controller.filter.BookSpecification.byFilter;
 
 @Slf4j
 @Service
@@ -28,14 +30,26 @@ public class BookService {
 
     @Cacheable(value = "books", key = "#book.name")
     public Book createBook(Book book) {
+        log.info("create book: {}", book);
+
         return bookRepository.save(book);
+    }
+
+    public List<Book> getBooksBy(BookFilter filter){
+        Specification<Book> specification = Specification.where(byFilter(filter));
+        return bookRepository.findAll(specification);
+    }
+
+    public Book getBookById(Long id){
+        return bookRepository.getById(id);
     }
 
 
     @CacheEvict(value = "books")
-    public void deleteBookById(Long id) {
+    public Boolean deleteBookById(Long id) {
         log.info("delete book: {}", bookRepository.getById(id));
         bookRepository.delete(bookRepository.getById(id));
+        return true;
     }
 
 

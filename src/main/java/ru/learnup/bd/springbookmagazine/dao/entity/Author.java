@@ -1,5 +1,6 @@
 package ru.learnup.bd.springbookmagazine.dao.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -23,6 +24,7 @@ public class Author {
     private String fullName; //ФИО
 
 
+    @JsonIgnore
     @OneToMany(mappedBy = "author", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Book> book;
@@ -31,6 +33,7 @@ public class Author {
     public int hashCode(){
         return getClass().hashCode();
     }
+
 
 
 }

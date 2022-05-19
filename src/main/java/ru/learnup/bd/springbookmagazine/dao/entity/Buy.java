@@ -1,11 +1,14 @@
 package ru.learnup.bd.springbookmagazine.dao.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
 @Table
 public class Buy {
 
+    @JsonIgnore
     @ManyToOne
     private Buyer idBuyer;
 

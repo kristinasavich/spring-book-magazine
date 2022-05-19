@@ -1,5 +1,6 @@
 package ru.learnup.bd.springbookmagazine.dao.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,6 +24,7 @@ public class Book  {
     @Column
     private Long yearPublishing; // год издания
 
+    @JsonIgnore
     @ManyToOne
     @ToString.Exclude
     private Author author;
@@ -43,7 +45,8 @@ public class Book  {
 //    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    private DetailsBuy detailsBuy;
 
-    public Book(String name, Long yearPublishing, Long numbPages, Long sum){
+    public Book(String name, Long yearPublishing, Long numbPages, Long sum, Author author){
+        this.author = author;
         this.yearPublishing = yearPublishing;
         this.numbPages = numbPages;
         this.name = name;

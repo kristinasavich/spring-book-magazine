@@ -1,5 +1,6 @@
 package ru.learnup.bd.springbookmagazine.dao.repository;
 
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -15,5 +16,11 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findAllByAuthorContains(String name);
 
     List<Book> findBookByNameContains(String name);
+
+    List<Book> findAllByNameContains(String name);
+    List<Book> findAllByNameOrAuthor(String name, String nameAuthor);
+
+    List<Book> findAll(Specification<Book> specification);
+
 
 }

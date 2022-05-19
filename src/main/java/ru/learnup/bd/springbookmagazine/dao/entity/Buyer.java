@@ -1,5 +1,6 @@
 package ru.learnup.bd.springbookmagazine.dao.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,6 +23,7 @@ public class Buyer {
     @Column
     private Long birthDay;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Buy> buyId;
 
