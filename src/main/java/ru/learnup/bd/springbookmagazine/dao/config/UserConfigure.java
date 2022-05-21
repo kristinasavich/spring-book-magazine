@@ -13,12 +13,15 @@ public class UserConfigure extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 //        http.csrf().disable().authorizeRequests().anyRequest().permitAll(); // Works for GET, POST, PUT, DELETE
         http.authorizeRequests()
-                .antMatchers("/").authenticated()
+                .antMatchers("/registration").not().fullyAuthenticated()
 //                .antMatchers("/admin/**").hasRole("ADMIN")
 //                .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/api/v1/book").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/", "/resources/**").permitAll()
+                .anyRequest().authenticated();
 //                .antMatchers("/**").permitAll()
-                .and()
-                .formLogin();
+//                .and()
+//                .formLogin();
 
     }
 
