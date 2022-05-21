@@ -22,7 +22,6 @@ public class UserConfigure extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/**").permitAll()
                 .and()
                 .formLogin();
-
     }
 
     @Bean
