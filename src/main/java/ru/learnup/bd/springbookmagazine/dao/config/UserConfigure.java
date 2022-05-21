@@ -18,10 +18,10 @@ public class UserConfigure extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/api/v1/book").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/", "/resources/**").permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
 //                .antMatchers("/**").permitAll()
-//                .and()
-//                .formLogin();
+                .and()
+                .formLogin();
 
     }
 
