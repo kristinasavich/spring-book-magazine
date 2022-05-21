@@ -1,5 +1,7 @@
 package ru.learnup.bd.springbookmagazine.dao.controller;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.web.bind.annotation.*;
 import ru.learnup.bd.springbookmagazine.BookViewMapper;
 import ru.learnup.bd.springbookmagazine.dao.controller.filter.BookFilter;
@@ -11,6 +13,7 @@ import javax.persistence.EntityExistsException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/book")
 
@@ -50,6 +53,7 @@ public class BookControllerRest {
         return mapper.mapToView(serviceBook);
     }
 
+    @CacheEvict(value = "book")
     @DeleteMapping("/{bookId}")
     public Boolean deleteBook(@PathVariable("bookId") Long bookId) {
         return bookService.deleteBookById(bookId);
