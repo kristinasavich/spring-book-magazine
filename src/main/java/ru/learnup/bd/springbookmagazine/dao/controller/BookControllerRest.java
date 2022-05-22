@@ -2,8 +2,9 @@ package ru.learnup.bd.springbookmagazine.dao.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
-import ru.learnup.bd.springbookmagazine.BookViewMapper;
+import ru.learnup.bd.springbookmagazine.dao.controller.mapper.BookViewMapper;
 import ru.learnup.bd.springbookmagazine.dao.controller.filter.BookFilter;
 import ru.learnup.bd.springbookmagazine.dao.controller.view.BookView;
 import ru.learnup.bd.springbookmagazine.dao.entity.Book;
@@ -26,6 +27,7 @@ public class BookControllerRest {
         this.mapper = mapper;
     }
 
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping
     public List<BookView> getBooks(
             @RequestParam(value = "author", required = false) String author,
@@ -37,15 +39,16 @@ public class BookControllerRest {
                 .collect(Collectors.toList());
     }
 
-
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/{postId}")
     public BookView getBook(@PathVariable("postId") Long bookId){
         return mapper.mapToView(bookService.getBookById(bookId));
     }
 
+    @Secured({"ROLE_ADMIN"})
     @PostMapping
     public BookView createBook(@RequestBody BookView body){
-        if(body.getId() != null){
+        if(body.getId() != 0){
             throw new EntityExistsException("Book exists!");
         }
         Book book = mapper.mapFromView(body);
@@ -53,6 +56,7 @@ public class BookControllerRest {
         return mapper.mapToView(serviceBook);
     }
 
+    @Secured({"ROLE_ADMIN"})
     @CacheEvict(value = "book")
     @DeleteMapping("/{bookId}")
     public Boolean deleteBook(@PathVariable("bookId") Long bookId) {

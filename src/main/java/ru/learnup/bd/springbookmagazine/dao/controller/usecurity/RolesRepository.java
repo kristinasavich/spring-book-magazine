@@ -1,4 +1,4 @@
-package ru.learnup.bd.springbookmagazine.dao.repository;
+package ru.learnup.bd.springbookmagazine.dao.controller.usecurity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -19,14 +19,14 @@ import java.util.Objects;
 public class DetailsBuy implements Serializable {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; //IDEA потребовала
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id; //
 
     @JsonIgnore
     @MapsId
     @OneToOne
     @JoinColumn
-    private Buy idOrders;
+    private Buy idBuy;
 
     @ManyToMany
     private List<Book> book;

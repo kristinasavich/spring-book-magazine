@@ -1,13 +1,13 @@
-package ru.learnup.bd.springbookmagazine;
+package ru.learnup.bd.springbookmagazine.dao.controller.mapper;
 
 import org.springframework.stereotype.Component;
 import ru.learnup.bd.springbookmagazine.dao.controller.view.BookView;
+import ru.learnup.bd.springbookmagazine.dao.entity.Author;
 import ru.learnup.bd.springbookmagazine.dao.entity.Book;
 import ru.learnup.bd.springbookmagazine.dao.service.AuthorService;
 import ru.learnup.bd.springbookmagazine.dao.service.BookService;
 
 @Component
-
 public class BookViewMapper {
 
     private final AuthorService authorService;
@@ -38,7 +38,12 @@ public class BookViewMapper {
         book.setNumbPages(bookView.getNumbPages());
         book.setYearPublishing(bookView.getYearPublishing());
         book.setSum(bookView.getSum());
-        book.setAuthor(authorService.getAuthorByName(bookView.getAuthor()));
+        Author authorByName = new Author();
+        if(authorService.getAuthorByName(bookView.getAuthor()) == null){
+            authorByName.setFullName(bookView.getAuthor());
+            authorService.createAuthor(authorByName);
+        }
+        book.setAuthor(authorByName);
 
         return book;
     }

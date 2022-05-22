@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface BuyerRepository extends JpaRepository <Buyer, Long> {
 
+    Buyer findAllByFullNameContains(String name);
+
 }
