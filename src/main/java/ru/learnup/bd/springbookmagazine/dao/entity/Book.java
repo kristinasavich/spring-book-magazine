@@ -2,6 +2,7 @@ package ru.learnup.bd.springbookmagazine.dao.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import ru.learnup.bd.springbookmagazine.dao.report.Report;
 
 import javax.persistence.*;
 import java.io.Serializable;

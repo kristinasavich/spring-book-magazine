@@ -24,4 +24,5 @@ public class Buy {
 
     @Column
     private Long sum;
+
 }
